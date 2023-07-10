@@ -18,7 +18,7 @@ const CreateSearch: FC<CreateSearchProps> = ({ userId }) => {
 		formState: { errors },
 	} = useForm<CreateSearchValidator>({
 		defaultValues: {
-			name: 'Enter Search Name...',
+			name: '',
 		},
 		resolver: zodResolver(SearchValidator),
 	})
@@ -49,6 +49,7 @@ const CreateSearch: FC<CreateSearchProps> = ({ userId }) => {
 		<>
 			<div
 				className='flex gap-2 cursor-pointer'
+				// @ts-ignore
 				onClick={() => window.my_modal_1.showModal()}
 			>
 				<PlusCircle />
@@ -57,8 +58,13 @@ const CreateSearch: FC<CreateSearchProps> = ({ userId }) => {
 			<dialog id='my_modal_1' className='modal' ref={modalRef}>
 				<form method='dialog' className='modal-box'>
 					<label>
-						Search Name
-						<input {...register('name')} />
+						{/* <input {...register('name')} /> */}
+						<input
+							{...register('name')}
+							type='text'
+							placeholder='Enter Search Name'
+							className='input input-bordered w-full max-w-xs'
+						/>
 					</label>
 					{errors.name && (
 						<p className='text-red-400 mt-2'>{errors.name.message}</p>
