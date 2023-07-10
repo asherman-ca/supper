@@ -1,21 +1,33 @@
 'use client'
-import { FC, useRef } from 'react'
+import { FC, useEffect, useRef } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { PlusCircle } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
+import { CreateSearchValidator, SearchValidator } from '@/lib/validators/search'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 interface CreateSearchProps {
 	userId: string | undefined
 }
 
 const CreateSearch: FC<CreateSearchProps> = ({ userId }) => {
-	const { register, handleSubmit } = useForm()
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<CreateSearchValidator>({
+		defaultValues: {
+			name: 'Enter Search Name...',
+		},
+		resolver: zodResolver(SearchValidator),
+	})
 	const modalRef = useRef<HTMLDialogElement>(null)
 
 	const { mutate: createSearch, isLoading } = useMutation({
-		mutationFn: async (formData: any) => {
-			const { data } = await axios.post('/api/searches', formData)
+		mutationFn: async ({ name }: CreateSearchValidator) => {
+			const payload: CreateSearchValidator = { name }
+			const { data } = await axios.post('/api/searches', payload)
 			return data
 		},
 		onSuccess: (data) => {
@@ -27,32 +39,35 @@ const CreateSearch: FC<CreateSearchProps> = ({ userId }) => {
 		},
 	})
 
-	const onSubmit = (data: any) => {
-		console.log('hits')
-		// console.log('data', data)
-		createSearch(data)
-		// window.my_modal_1.close()
+	const onSubmit = (data: CreateSearchValidator) => {
+		const payload: CreateSearchValidator = { name: data.name }
+
+		createSearch(payload)
 	}
 
 	return (
 		<>
-			<div className='flex gap-2' onClick={() => window.my_modal_1.showModal()}>
+			<div
+				className='flex gap-2 cursor-pointer'
+				onClick={() => window.my_modal_1.showModal()}
+			>
 				<PlusCircle />
 				CreateSearch
 			</div>
 			<dialog id='my_modal_1' className='modal' ref={modalRef}>
-				<form
-					// onSubmit={handleSubmit(onSubmit)}
-					method='dialog'
-					className='modal-box'
-				>
+				<form method='dialog' className='modal-box'>
 					<label>
 						Search Name
-						<input {...register('searchName')} />
+						<input {...register('name')} />
 					</label>
+					{errors.name && (
+						<p className='text-red-400 mt-2'>{errors.name.message}</p>
+					)}
 					<div className='flex items-center justify-between'>
 						<div className='modal-action'>
-							<button onClick={handleSubmit(onSubmit)}>Submit</button>
+							<button className='btn' onClick={handleSubmit(onSubmit)}>
+								Submit
+							</button>
 						</div>
 
 						<div className='modal-action'>
