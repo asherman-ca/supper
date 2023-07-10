@@ -10,7 +10,7 @@ const Nav = async () => {
 	const session = await getAuthSession()
 
 	return (
-		<div className='navbar'>
+		<div className='navbar border-b border-gray-200'>
 			<div className='flex-1 px-2 lg:flex-none'>
 				<Link
 					href='/'

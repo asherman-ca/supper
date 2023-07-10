@@ -15,7 +15,7 @@ export const authOptions: NextAuthOptions = {
 		}),
 	],
 	callbacks: {
-		async session({ token, session, user }) {
+		async session({ session, user }) {
 			if (user) {
 				session.user.id = user.id
 				session.user.name = user.name
@@ -24,6 +24,10 @@ export const authOptions: NextAuthOptions = {
 			}
 
 			return session
+		},
+		redirect() {
+			// redirect to homepage on login
+			return '/dashboard'
 		},
 	},
 }
