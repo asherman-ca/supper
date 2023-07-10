@@ -1,30 +1,33 @@
+import { getAuthSession } from '@/lib/auth'
 import DarkMode from './DarkMode'
+import chefHat from '@/public/chef-hat.png'
+import Image from 'next/image'
+import Link from 'next/link'
+import Login from './Login'
+import Dropdown from './Dropdown'
 
-const Nav = () => {
+const Nav = async () => {
+	const session = await getAuthSession()
+
 	return (
-		<div className='navbar bg-base-300'>
+		<div className='navbar'>
 			<div className='flex-1 px-2 lg:flex-none'>
-				<a className='text-lg font-bold'>Supper</a>
+				<Link
+					href='/'
+					className='text-xl font-semibold flex items-center gap-1 cursor-pointer'
+				>
+					<Image
+						src={chefHat}
+						alt='logo'
+						className='h-8 w-8 dark:bg-gray-400 rounded-full p-[.125rem]'
+					></Image>
+					Supper
+				</Link>
 			</div>
 			<div className='flex justify-end flex-1 px-2'>
-				<div className='flex items-stretch'>
+				<div className='flex items-center gap-4'>
 					<DarkMode />
-					<div className='dropdown dropdown-end'>
-						<label tabIndex={0} className='btn btn-ghost rounded-btn'>
-							Dropdown
-						</label>
-						<ul
-							tabIndex={0}
-							className='menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52 mt-4'
-						>
-							<li>
-								<a>Item 1</a>
-							</li>
-							<li>
-								<a>Item 2</a>
-							</li>
-						</ul>
-					</div>
+					{session ? <Dropdown user={session.user} /> : <Login />}
 				</div>
 			</div>
 		</div>
