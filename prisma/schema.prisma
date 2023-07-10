@@ -11,6 +11,12 @@ datasource db {
   relationMode = "prisma"
 }
 
+enum StatusType {
+  INTERVIEW
+  ACTIVE
+  INACTIVE
+}
+
 model Account {
   id                String  @id @default(cuid())
   userId            String
@@ -47,4 +53,35 @@ model User {
   image    String?
   accounts Account[]
   sessions Session[]
+
+  searches      Search[]
+  jobs          Job[]
+}
+
+model Search {
+  id            String    @id @default(cuid())
+  name          String
+  CreatedAt     DateTime  @default(now())
+  UpdatedAt     DateTime  @updatedAt
+
+  userId        String
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  jobs          Job[]
+}
+
+model Job {
+  id            String    @id @default(cuid())
+  role          String
+  company       String
+  location      String
+  status        StatusType
+  CreatedAt     DateTime  @default(now())
+  UpdatedAt     DateTime  @updatedAt
+
+  userId        String
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  searchId      String
+  search        Search @relation(fields: [searchId], references: [id], onDelete: Cascade)
 }
