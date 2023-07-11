@@ -1,7 +1,7 @@
 'use client'
 import { FC, useRef } from 'react'
 import { useMutation } from '@tanstack/react-query'
-import { Loader2, PlusCircle } from 'lucide-react'
+import { PlusCircle } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import axios, { AxiosError } from 'axios'
 import { CreateSearchValidator, SearchValidator } from '@/lib/validators/search'
@@ -64,6 +64,7 @@ const CreateSearch: FC<CreateSearchProps> = ({ userId }) => {
 			</div>
 			<dialog id='my_modal_1' className='modal' ref={modalRef}>
 				<form method='dialog' className='modal-box'>
+					<h2 className='text-2xl font-semibold mb-4'>Start New Search</h2>
 					<label>
 						<input
 							{...register('name')}
@@ -78,15 +79,14 @@ const CreateSearch: FC<CreateSearchProps> = ({ userId }) => {
 					<div className='flex items-center justify-between'>
 						<div className='modal-action'>
 							<button className='btn' onClick={handleSubmit(onSubmit)}>
-								{isLoading && <Loader2 className='animate-spin' />}
+								{isLoading && <span className='loading loading-spinner'></span>}
 								Submit
 							</button>
 						</div>
-
-						<div className='modal-action'>
-							<button className='btn'>Close</button>
-						</div>
 					</div>
+				</form>
+				<form method='dialog' className='modal-backdrop'>
+					<button>close</button>
 				</form>
 			</dialog>
 		</>
