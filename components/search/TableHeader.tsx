@@ -20,10 +20,6 @@ const TableHeader: FC<TableHeaderProps> = ({ search }) => {
 				</div>
 			</div>
 			<CreateJob searchId={search?.id} />
-			{/* <button className='btn btn-sm'>
-				<PlusCircle className='w-4 h-4' />
-				Add Job
-			</button> */}
 		</div>
 	)
 }

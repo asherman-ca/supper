@@ -54,7 +54,7 @@ const CreateJob: FC<CreateJobProps> = ({ searchId }) => {
 			modalRef.current!.close()
 			reset()
 			router.refresh()
-			router.push(`/dashboard/${searchId}/${data}`)
+			// router.push(`/dashboard/${searchId}/${data}`)
 		},
 		onError: (err) => {
 			alert('error')
