@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
+import { XCircle } from 'lucide-react'
+import SearchListItem from './SearchListItem'
 
 interface SearchListProps {
 	initialSearches: Search[]
@@ -13,7 +15,7 @@ interface SearchListProps {
 const SearchList: FC<SearchListProps> = ({ initialSearches }) => {
 	const router = useRouter()
 
-	const { mutate: deleteSearch } = useMutation({
+	const { mutate: deleteSearch, isLoading } = useMutation({
 		mutationFn: async (id: string) => {
 			const { data } = await axios.patch(`/api/searches?id=${id}`)
 			return data
@@ -28,22 +30,26 @@ const SearchList: FC<SearchListProps> = ({ initialSearches }) => {
 
 	return (
 		<div className='flex flex-col gap-4'>
-			{initialSearches.map((search) => (
-				<div key={search.id}>
-					<Link
-						href={`/dashboard/${search.id}`}
-						className='font-medium hover:font-semibold'
-					>
-						{search.name}
-					</Link>
-					<button
-						onClick={() => deleteSearch(search.id)}
-						className='text-red-500 hover:text-red-600'
-					>
-						Delete
-					</button>
-				</div>
-			))}
+			{initialSearches.map((search) => {
+				return (
+					<div key={search.id} className='flex justify-between items-center'>
+						<Link
+							href={`/dashboard/${search.id}`}
+							className='font-medium truncate'
+						>
+							{search.name}
+						</Link>
+						<button
+							onClick={() => deleteSearch(search.id)}
+							className='hover:text-red-500'
+							key={search.id}
+							disabled={isLoading}
+						>
+							<XCircle className={`h-5 w-5`} />
+						</button>
+					</div>
+				)
+			})}
 		</div>
 	)
 }

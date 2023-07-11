@@ -22,7 +22,7 @@ export async function POST(req: Request) {
 		})
 
 		if (searchExists) {
-			return new Response('Subreddit already exists', { status: 409 })
+			return new Response('Search already exists', { status: 409 })
 		}
 
 		const newSearch = await db.search.create({

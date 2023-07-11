@@ -8,11 +8,7 @@ import { CreateSearchValidator, SearchValidator } from '@/lib/validators/search'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 
-interface CreateSearchProps {
-	userId: string | undefined
-}
-
-const CreateSearch: FC<CreateSearchProps> = ({ userId }) => {
+const CreateSearch = () => {
 	const router = useRouter()
 
 	const {
@@ -56,12 +52,12 @@ const CreateSearch: FC<CreateSearchProps> = ({ userId }) => {
 	return (
 		<>
 			<div
-				className='flex gap-2 cursor-pointer'
+				className='flex items-center justify-between gap-2 cursor-pointer font-medium group dark:hover:text-white hover:text-slate-500'
 				// @ts-ignore
 				onClick={() => window.my_modal_1.showModal()}
 			>
-				<PlusCircle />
 				CreateSearch
+				<PlusCircle className='h-5 w-5 group-hover:text-green-500' />
 			</div>
 			<dialog id='my_modal_1' className='modal' ref={modalRef}>
 				<form method='dialog' className='modal-box'>
