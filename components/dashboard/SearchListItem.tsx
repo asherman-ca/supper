@@ -1,7 +1,7 @@
 'use client'
 import { FC, useEffect, useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import axios from 'axios'
 import { FolderOpen, XCircle } from 'lucide-react'
 import Link from 'next/link'
@@ -13,6 +13,7 @@ interface SearchListItemProps {
 
 const SearchListItem: FC<SearchListItemProps> = ({ search }) => {
 	const router = useRouter()
+	const pathname = usePathname()
 
 	const { mutate: deleteSearch, isLoading } = useMutation({
 		mutationFn: async (id: string) => {
@@ -20,7 +21,12 @@ const SearchListItem: FC<SearchListItemProps> = ({ search }) => {
 			return data
 		},
 		onSuccess: () => {
-			router.refresh()
+			if (pathname.includes(search.id)) {
+				router.refresh()
+				router.push('/dashboard')
+			} else {
+				router.refresh()
+			}
 		},
 		onError: (err) => {
 			alert(err)
