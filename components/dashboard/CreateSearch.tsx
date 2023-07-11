@@ -37,6 +37,7 @@ const CreateSearch: FC<CreateSearchProps> = ({ userId }) => {
 		onSuccess: (data) => {
 			modalRef.current!.close()
 			reset()
+			router.refresh()
 			router.push(`/dashboard/${data}`)
 		},
 		onError: (err) => {
