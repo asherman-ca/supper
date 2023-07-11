@@ -14,19 +14,19 @@ const Nav = async () => {
 			<div className='flex-1 px-2 lg:flex-none'>
 				<Link
 					href='/'
-					className='text-xl font-semibold flex items-center gap-1 cursor-pointer'
+					className='text-2xl font-semibold flex items-center gap-1 cursor-pointer'
 				>
 					<Image
 						src={chefHat}
 						alt='logo'
-						className='h-8 w-8 dark:bg-gray-400 rounded-full p-[.125rem]'
+						className='h-10 w-10 dark:bg-gray-400 rounded-full p-[.125rem]'
 					></Image>
 					Supper
 				</Link>
 			</div>
 			<div className='flex justify-end flex-1 px-2'>
 				<div className='flex items-center gap-4'>
-					<DarkMode />
+					{/* <DarkMode /> */}
 					{session ? <Dropdown user={session.user} /> : <Login />}
 				</div>
 			</div>

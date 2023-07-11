@@ -75,7 +75,7 @@ model Job {
   role          String
   company       String
   location      String
-  status        StatusType
+  status        StatusType @default(ACTIVE)
   CreatedAt     DateTime  @default(now())
   UpdatedAt     DateTime  @updatedAt
 

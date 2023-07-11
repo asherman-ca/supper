@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { signOut } from 'next-auth/react'
 import { User } from 'next-auth'
 import Link from 'next/link'
+import DarkMode from './DarkMode'
 
 interface UserAccountNavProps extends React.HTMLAttributes<HTMLDivElement> {
 	user: Pick<User, 'name' | 'image' | 'email'>
@@ -25,6 +26,12 @@ const Dropdown: FC<UserAccountNavProps> = ({ user }) => {
 				tabIndex={0}
 				className='menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52 mt-4'
 			>
+				<li>
+					<DarkMode />
+				</li>
+				<li>
+					<Link href='/'>Homepage</Link>
+				</li>
 				<li>
 					{/* <button data-toggle-theme='dark,light' data-act-class='ACTIVECLASS'>
 						Dark/Light Mode

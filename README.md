@@ -38,6 +38,11 @@ supper.webapp@gmail.com
 
 Stack:
 Next
+SSR + ReactQuery + Zod
 Tailwind / DaisyUi
 Vercel
 Planetscale
+
+Design:
+https://dovetail.com/
+https://mobbin.com/browse/web/screens?filter=screenElements.Table&sort=popularity

@@ -1,5 +1,5 @@
 'use client'
-import { FC, useRef } from 'react'
+import { useRef } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { PlusCircle } from 'lucide-react'
 import { useForm } from 'react-hook-form'
@@ -52,12 +52,12 @@ const CreateSearch = () => {
 	return (
 		<>
 			<div
-				className='flex items-center justify-between gap-2 cursor-pointer font-medium group dark:hover:text-white hover:text-slate-500'
+				className='flex items-center justify-between mx-2 gap-2 cursor-pointer font-medium dark:hover:text-white hover:text-slate-500 hover:bg-gray-100 dark:hover:bg-gray-500/25 py-2 px-4 rounded-full'
 				// @ts-ignore
 				onClick={() => window.my_modal_1.showModal()}
 			>
 				CreateSearch
-				<PlusCircle className='h-5 w-5 group-hover:text-green-500' />
+				<PlusCircle className='h-5 w-5' />
 			</div>
 			<dialog id='my_modal_1' className='modal' ref={modalRef}>
 				<form method='dialog' className='modal-box'>

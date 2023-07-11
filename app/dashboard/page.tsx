@@ -3,7 +3,7 @@ import React from 'react'
 
 const page = () => {
 	return (
-		<div className='flex gap-2'>
+		<div className='flex-[3] flex gap-2 p-4'>
 			<ArrowBigLeft />
 			Select a job search
 		</div>

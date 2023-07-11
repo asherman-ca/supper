@@ -18,7 +18,10 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang='en' data-theme='light'>
-			<body className={`${inter.className} min-h-screen flex flex-col`}>
+			<body
+				className={`${inter.className} min-h-screen flex flex-col`}
+				suppressHydrationWarning={true}
+			>
 				<Providers>
 					<Nav />
 					{children}
