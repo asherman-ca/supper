@@ -32,7 +32,7 @@ export async function POST(req: Request) {
 			},
 		})
 
-		return new Response('Search created', { status: 201 })
+		return new Response(name, { status: 201 })
 	} catch (error) {
 		if (error instanceof z.ZodError) {
 			return new Response(error.message, { status: 422 })

@@ -6,12 +6,15 @@ import { useForm } from 'react-hook-form'
 import axios, { AxiosError } from 'axios'
 import { CreateSearchValidator, SearchValidator } from '@/lib/validators/search'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
 
 interface CreateSearchProps {
 	userId: string | undefined
 }
 
 const CreateSearch: FC<CreateSearchProps> = ({ userId }) => {
+	const router = useRouter()
+
 	const {
 		register,
 		handleSubmit,
@@ -32,9 +35,9 @@ const CreateSearch: FC<CreateSearchProps> = ({ userId }) => {
 			return data
 		},
 		onSuccess: (data) => {
-			console.log(data)
 			modalRef.current!.close()
 			reset()
+			router.push(`/dashboard/${data}`)
 		},
 		onError: (err) => {
 			if (err instanceof AxiosError) {
