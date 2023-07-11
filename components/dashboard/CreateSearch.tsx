@@ -1,9 +1,9 @@
 'use client'
-import { FC, useEffect, useRef } from 'react'
+import { FC, useRef } from 'react'
 import { useMutation } from '@tanstack/react-query'
-import { PlusCircle } from 'lucide-react'
+import { Loader2, PlusCircle } from 'lucide-react'
 import { useForm } from 'react-hook-form'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import { CreateSearchValidator, SearchValidator } from '@/lib/validators/search'
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -16,6 +16,7 @@ const CreateSearch: FC<CreateSearchProps> = ({ userId }) => {
 		register,
 		handleSubmit,
 		formState: { errors },
+		reset,
 	} = useForm<CreateSearchValidator>({
 		defaultValues: {
 			name: '',
@@ -33,9 +34,12 @@ const CreateSearch: FC<CreateSearchProps> = ({ userId }) => {
 		onSuccess: (data) => {
 			console.log(data)
 			modalRef.current!.close()
+			reset()
 		},
 		onError: (err) => {
-			alert('error')
+			if (err instanceof AxiosError) {
+				alert(err.response?.data)
+			}
 		},
 	})
 
@@ -58,7 +62,6 @@ const CreateSearch: FC<CreateSearchProps> = ({ userId }) => {
 			<dialog id='my_modal_1' className='modal' ref={modalRef}>
 				<form method='dialog' className='modal-box'>
 					<label>
-						{/* <input {...register('name')} /> */}
 						<input
 							{...register('name')}
 							type='text'
@@ -72,12 +75,12 @@ const CreateSearch: FC<CreateSearchProps> = ({ userId }) => {
 					<div className='flex items-center justify-between'>
 						<div className='modal-action'>
 							<button className='btn' onClick={handleSubmit(onSubmit)}>
+								{isLoading && <Loader2 className='animate-spin' />}
 								Submit
 							</button>
 						</div>
 
 						<div className='modal-action'>
-							{/* if there is a button in form, it will close the modal */}
 							<button className='btn'>Close</button>
 						</div>
 					</div>
