@@ -71,7 +71,9 @@ const CreateSearch = () => {
 						/>
 					</label>
 					{errors.name && (
-						<p className='text-red-400 mt-2'>{errors.name.message}</p>
+						<p className='text-red-400 mt-2'>
+							{errors.name?.message?.replace(/String/gi, 'Name')}
+						</p>
 					)}
 					<div className='flex items-center justify-between'>
 						<div className='modal-action'>

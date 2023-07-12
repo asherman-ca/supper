@@ -63,9 +63,9 @@ const CommentForm: FC<CommentFormProps> = ({ jobId }) => {
 				<button className='absolute bottom-4 right-2 btn btn-sm' type='submit'>
 					Post
 				</button>
-				{errors && (
-					<p className='text-red-400 absolute left-0 -bottom-6'>
-						{errors.content?.message}
+				{errors.content && (
+					<p className='text-red-400 absolute left-4 bottom-4'>
+						{errors.content?.message?.replace(/String/gi, 'Content')}
 					</p>
 				)}
 			</form>

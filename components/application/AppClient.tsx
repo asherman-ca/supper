@@ -48,9 +48,13 @@ const AppClient: FC<AppClientProps> = ({ job, username, searchId }) => {
 				</div>
 			</div>
 			<CommentForm jobId={job.id} />
-			{job.comments.map((comment) => (
-				<CommentItem key={comment.id} comment={comment} />
-			))}
+			{job.comments.length > 0 && (
+				<div className='px-4 flex flex-col mb-4'>
+					{job.comments.map((comment) => (
+						<CommentItem key={comment.id} comment={comment} />
+					))}
+				</div>
+			)}
 			<div className='whitespace-pre-wrap px-4'>{completion}</div>
 		</div>
 	)

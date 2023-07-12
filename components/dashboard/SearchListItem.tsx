@@ -17,7 +17,7 @@ const SearchListItem: FC<SearchListItemProps> = ({ search }) => {
 
 	const { mutate: deleteSearch, isLoading } = useMutation({
 		mutationFn: async (id: string) => {
-			const { data } = await axios.patch(`/api/searches?id=${id}`)
+			const { data } = await axios.delete(`/api/searches?id=${id}`)
 			return data
 		},
 		onSuccess: () => {
@@ -45,7 +45,6 @@ const SearchListItem: FC<SearchListItemProps> = ({ search }) => {
 			<button
 				onClick={() => deleteSearch(search.id)}
 				className='hover:text-red-500'
-				key={search.id}
 			>
 				<XCircle
 					className={`h-5 w-5 ${isLoading && 'animate-spin text-red-500'}`}

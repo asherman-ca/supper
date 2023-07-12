@@ -90,7 +90,9 @@ const CreateJob: FC<CreateJobProps> = ({ searchId }) => {
 								className='input input-bordered w-full max-w-xs'
 							/>
 							{errors.role && (
-								<p className='text-red-400 mt-2'>{errors.role.message}</p>
+								<p className='text-red-400 mt-2'>
+									{errors.role?.message?.replace(/String/gi, 'Role')}
+								</p>
 							)}
 						</label>
 
@@ -101,8 +103,10 @@ const CreateJob: FC<CreateJobProps> = ({ searchId }) => {
 								placeholder='Enter Company Name'
 								className='input input-bordered w-full max-w-xs'
 							/>
-							{errors.role && (
-								<p className='text-red-400 mt-2'>{errors.role.message}</p>
+							{errors.company && (
+								<p className='text-red-400 mt-2'>
+									{errors.company?.message?.replace(/String/gi, 'Company')}
+								</p>
 							)}
 						</label>
 
@@ -113,8 +117,10 @@ const CreateJob: FC<CreateJobProps> = ({ searchId }) => {
 								placeholder='Enter Location'
 								className='input input-bordered w-full max-w-xs'
 							/>
-							{errors.role && (
-								<p className='text-red-400 mt-2'>{errors.role.message}</p>
+							{errors.location && (
+								<p className='text-red-400 mt-2'>
+									{errors.location?.message?.replace(/String/gi, 'Location')}
+								</p>
 							)}
 						</label>
 
