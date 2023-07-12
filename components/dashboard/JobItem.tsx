@@ -1,21 +1,41 @@
 'use client'
 import { Job } from '@prisma/client'
 import Link from 'next/link'
-import { FC } from 'react'
+import { ChangeEvent, FC } from 'react'
 import { statusMap } from '@/lib/statusMap'
 import { motion } from 'framer-motion'
 
 interface JobItemProps {
 	job: Job
 	searchId: string
+	handleCheck: (e: ChangeEvent<HTMLInputElement>, id: string) => void
+	isSelected: boolean
 }
 
-const JobItem: FC<JobItemProps> = ({ job, searchId }) => {
+const JobItem: FC<JobItemProps> = ({
+	job,
+	searchId,
+	handleCheck,
+	isSelected,
+}) => {
 	return (
-		<motion.div layout animate={{ opacity: 1 }} initial={{ opacity: 0 }}>
+		<motion.div
+			layout
+			animate={{ opacity: 1 }}
+			initial={{ opacity: 0 }}
+			className='flex items-center gap-4 border-b border-gray-200'
+		>
+			<label className='flex items-center'>
+				<input
+					checked={isSelected}
+					type='checkbox'
+					className='checkbox'
+					onChange={(e) => handleCheck(e, job.id)}
+				/>
+			</label>
 			<Link
 				href={`/dashboard/${searchId}/${job.id}`}
-				className='flex py-2 hover:shadow-md dark:hover:bg-gray-100/25 px-4 cursor-pointer border-b border-gray-200'
+				className='flex flex-1 items-center py-2 hover:text-gray-500 dark:hover:text-white cursor-pointer'
 			>
 				<div className='basis-[20%] font-medium'>{job.company}</div>
 				<div className='basis-[20%] text-end'>{job.role}</div>
