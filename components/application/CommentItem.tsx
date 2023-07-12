@@ -29,8 +29,8 @@ const CommentItem: FC<CommentItemProps> = ({ comment }) => {
 	})
 
 	return (
-		<div className='flex flex-col gap-2'>
-			<div className='text-sm font-semibold flex justify-between items-center'>
+		<div className='flex flex-col gap-4 border border-gray-200 py-4'>
+			<div className='text-sm font-semibold flex justify-between items-center border-b border-gray-200 pb-4 px-4'>
 				Posted {comment.CreatedAt.toDateString()}
 				<button
 					onClick={() => deleteSearch(comment.id)}
@@ -41,7 +41,7 @@ const CommentItem: FC<CommentItemProps> = ({ comment }) => {
 					/>
 				</button>
 			</div>
-			{comment.content}
+			<div className='px-4'>{comment.content}</div>
 		</div>
 	)
 }

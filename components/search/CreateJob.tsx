@@ -54,7 +54,6 @@ const CreateJob: FC<CreateJobProps> = ({ searchId }) => {
 			modalRef.current!.close()
 			reset()
 			router.refresh()
-			// router.push(`/dashboard/${searchId}/${data}`)
 		},
 		onError: (err) => {
 			alert('error')
@@ -65,8 +64,6 @@ const CreateJob: FC<CreateJobProps> = ({ searchId }) => {
 		console.log('hits')
 		createJob(data)
 	}
-
-	console.log(errors)
 
 	return (
 		<>
@@ -126,7 +123,9 @@ const CreateJob: FC<CreateJobProps> = ({ searchId }) => {
 
 						<div className='self-start'>
 							<button className='btn' onClick={handleSubmit(onSubmit)}>
-								{isLoading && <span className='loading loading-spinner'></span>}
+								{isLoading && (
+									<span className='loading loading-spinner loading-sm'></span>
+								)}
 								Submit
 							</button>
 						</div>

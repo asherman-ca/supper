@@ -78,7 +78,9 @@ const CreateSearch = () => {
 					<div className='flex items-center justify-between'>
 						<div className='modal-action'>
 							<button className='btn' onClick={handleSubmit(onSubmit)}>
-								{isLoading && <span className='loading loading-spinner'></span>}
+								{isLoading && (
+									<span className='loading loading-spinner loading-sm'></span>
+								)}
 								Submit
 							</button>
 						</div>

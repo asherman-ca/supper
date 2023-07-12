@@ -61,6 +61,9 @@ const CommentForm: FC<CommentFormProps> = ({ jobId }) => {
 					className='textarea textarea-bordered textarea-md w-full rounded-none min-h-[8rem]'
 				></textarea>
 				<button className='absolute bottom-4 right-2 btn btn-sm' type='submit'>
+					{isLoading && (
+						<span className='loading loading-spinner loading-sm'></span>
+					)}
 					Post
 				</button>
 				{errors.content && (
