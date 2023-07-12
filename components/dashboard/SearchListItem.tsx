@@ -6,6 +6,7 @@ import axios from 'axios'
 import { FolderOpen, XCircle } from 'lucide-react'
 import Link from 'next/link'
 import { Search } from '@prisma/client'
+import { motion } from 'framer-motion'
 
 interface SearchListItemProps {
 	search: Search
@@ -34,7 +35,12 @@ const SearchListItem: FC<SearchListItemProps> = ({ search }) => {
 	})
 
 	return (
-		<div className='flex justify-between items-center hover:bg-gray-100 dark:hover:bg-gray-500/25 py-2 px-4 rounded-full'>
+		<motion.div
+			layout
+			animate={{ opacity: 1 }}
+			initial={{ opacity: 0 }}
+			className='flex justify-between items-center hover:bg-gray-100 dark:hover:bg-gray-500/25 py-2 px-4 rounded-full'
+		>
 			<Link
 				href={`/dashboard/${search.id}`}
 				className='flex-1 flex items-center gap-2 font-medium dark:hover:text-white hover:text-slate-500 truncate'
@@ -50,7 +56,7 @@ const SearchListItem: FC<SearchListItemProps> = ({ search }) => {
 					className={`h-5 w-5 ${isLoading && 'animate-spin text-red-500'}`}
 				/>
 			</button>
-		</div>
+		</motion.div>
 	)
 }
 

@@ -5,6 +5,7 @@ import { XCircle } from 'lucide-react'
 import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
+import { motion } from 'framer-motion'
 
 interface CommentItemProps {
 	comment: Comment
@@ -29,7 +30,12 @@ const CommentItem: FC<CommentItemProps> = ({ comment }) => {
 	})
 
 	return (
-		<div className='flex flex-col gap-4 border border-gray-200 py-4'>
+		<motion.div
+			animate={{ opacity: 1 }}
+			initial={{ opacity: 0 }}
+			layout
+			className='flex flex-col gap-4 border border-gray-200 py-4'
+		>
 			<div className='text-sm font-semibold flex justify-between items-center border-b border-gray-200 pb-4 px-4'>
 				Posted {comment.CreatedAt.toDateString()}
 				<button
@@ -42,7 +48,7 @@ const CommentItem: FC<CommentItemProps> = ({ comment }) => {
 				</button>
 			</div>
 			<div className='px-4'>{comment.content}</div>
-		</div>
+		</motion.div>
 	)
 }
 
