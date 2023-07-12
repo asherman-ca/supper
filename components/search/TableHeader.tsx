@@ -9,13 +9,18 @@ interface TableHeaderProps {
 	search: ExtendedSearch | null
 	setFilter: (value: StatusType) => void
 	selectedJobs?: string[]
-	handleStateUpdate: (e: any, state: StatusType) => void
+	onStateUpdate: (e: any, state: StatusType) => void
+	onDelete: () => void
+	isLoading: boolean
 }
 
 const TableHeader: FC<TableHeaderProps> = ({
 	search,
 	setFilter,
 	selectedJobs,
+	onStateUpdate,
+	onDelete,
+	isLoading,
 }) => {
 	return (
 		<div className='flex items-center justify-between border-b border-gray-200 pb-4 px-4'>
@@ -64,8 +69,12 @@ const TableHeader: FC<TableHeaderProps> = ({
 							</ul>
 						</div>
 
-						<button className='btn btn-sm'>
-							<TrashIcon className='h-4 w-4' />
+						<button className='btn btn-sm' onClick={onDelete}>
+							{!isLoading ? (
+								<TrashIcon className={`h-4 w-4`} />
+							) : (
+								<span className='loading loading-spinner loading-sm'></span>
+							)}
 						</button>
 					</>
 				)}

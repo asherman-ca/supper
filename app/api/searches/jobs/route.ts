@@ -35,3 +35,46 @@ export async function POST(req: Request) {
 		return new Response('Could not create job', { status: 500 })
 	}
 }
+
+export async function DELETE(req: Request) {
+	try {
+		const session = await getAuthSession()
+
+		if (!session?.user) {
+			return new Response('Unauthorized', { status: 401 })
+		}
+
+		const url = new URL(req.url)
+		const ids = url.searchParams.get('ids')
+
+		const idsArray = ids?.split(',')
+
+		if (!idsArray) {
+			return new Response('Invalid ids', { status: 422 })
+		}
+
+		const jobs = await db.job.findMany({
+			where: {
+				id: {
+					in: idsArray,
+				},
+			},
+		})
+
+		const jobIds = jobs.map((job) => job.id)
+
+		if (jobIds.length === 0) {
+			return new Response('No jobs found', { status: 404 })
+		}
+
+		const deletedJobs = await db.job.deleteMany({
+			where: {
+				id: {
+					in: jobIds,
+				},
+			},
+		})
+
+		return new Response(deletedJobs.count.toString(), { status: 200 })
+	} catch (error) {}
+}
