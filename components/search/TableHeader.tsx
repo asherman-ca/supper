@@ -73,7 +73,7 @@ const TableHeader: FC<TableHeaderProps> = ({
 							{!isLoading ? (
 								<TrashIcon className={`h-4 w-4`} />
 							) : (
-								<span className='loading loading-spinner loading-sm'></span>
+								<span className='loading loading-spinner h-4 w-4'></span>
 							)}
 						</button>
 					</>
