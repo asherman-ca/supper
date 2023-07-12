@@ -54,11 +54,11 @@ const CommentForm: FC<CommentFormProps> = ({ jobId }) => {
 
 	return (
 		<>
-			<form className='mx-4 mb-4 relative' onSubmit={handleSubmit(onSubmit)}>
+			<form className='mx-4 mt-auto relative' onSubmit={handleSubmit(onSubmit)}>
 				<textarea
 					{...register('content')}
 					placeholder='Write a comment...'
-					className='textarea textarea-bordered textarea-md w-full rounded-none min-h-[8rem]'
+					className='textarea textarea-bordered textarea-md w-full rounded-none min-h-[8rem] !border-gray-200'
 				></textarea>
 				<button className='absolute bottom-4 right-2 btn btn-sm' type='submit'>
 					{isLoading && (

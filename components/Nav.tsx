@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Login from './Login'
 import Dropdown from './Dropdown'
+import DarkMode from './DarkMode'
 
 const Nav = async () => {
 	const session = await getAuthSession()
@@ -18,13 +19,14 @@ const Nav = async () => {
 					<Image
 						src={chefHat}
 						alt='logo'
-						className='h-10 w-10 dark:bg-gray-400 rounded-full p-[.125rem]'
+						className='h-8 w-8 dark:bg-gray-400 rounded-full p-[.125rem]'
 					></Image>
 					Supper
 				</Link>
 			</div>
 			<div className='flex justify-end flex-1 px-2'>
 				<div className='flex items-center gap-4'>
+					<DarkMode />
 					{session ? <Dropdown user={session.user} /> : <Login />}
 				</div>
 			</div>
