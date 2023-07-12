@@ -1,16 +1,25 @@
 'use client'
-import React, { FC, useEffect } from 'react'
+import React, { FC } from 'react'
 import Image from 'next/image'
 import { signOut } from 'next-auth/react'
 import { User } from 'next-auth'
 import Link from 'next/link'
 import DarkMode from './DarkMode'
+import { useRouter } from 'next/navigation'
 
 interface UserAccountNavProps extends React.HTMLAttributes<HTMLDivElement> {
 	user: Pick<User, 'name' | 'image' | 'email'>
 }
 
 const Dropdown: FC<UserAccountNavProps> = ({ user }) => {
+	const router = useRouter()
+
+	const onLogout = async (e: any) => {
+		await signOut({
+			callbackUrl: '/',
+		})
+	}
+
 	return (
 		<div className='dropdown dropdown-end'>
 			<label tabIndex={0}>
@@ -39,7 +48,7 @@ const Dropdown: FC<UserAccountNavProps> = ({ user }) => {
 					<Link href='/dashboard'>Dashboard</Link>
 				</li>
 				<li>
-					<p onClick={async () => await signOut()}>Logout</p>
+					<p onClick={onLogout}>Logout</p>
 				</li>
 			</ul>
 		</div>

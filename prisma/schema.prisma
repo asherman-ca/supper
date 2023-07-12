@@ -56,6 +56,7 @@ model User {
 
   searches      Search[]
   jobs          Job[]
+  comments      Comment[]
 }
 
 model Search {
@@ -84,4 +85,19 @@ model Job {
 
   searchId      String
   search        Search @relation(fields: [searchId], references: [id], onDelete: Cascade)
+
+  comments      Comment[]
+}
+
+model Comment {
+  id            String    @id @default(cuid())
+  content       String
+  CreatedAt     DateTime  @default(now())
+  UpdatedAt     DateTime  @updatedAt
+
+  userId        String
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  jobId         String
+  job           Job       @relation(fields: [jobId], references: [id], onDelete: Cascade)
 }

@@ -1,4 +1,4 @@
-import { JobValidator } from '@/lib/validators/job'
+import { CommentValidator } from '@/lib/validators/comment'
 import { getAuthSession } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { z } from 'zod'
@@ -12,26 +12,22 @@ export async function POST(req: Request) {
 		}
 
 		const body = await req.json()
-		const { role, company, location, status, searchId } =
-			JobValidator.parse(body)
+		const { content, jobId } = CommentValidator.parse(body)
 
-		const newJob = await db.job.create({
+		const newComment = await db.comment.create({
 			data: {
-				role,
-				company,
-				location,
-				status,
+				content,
 				userId: session.user.id,
-				searchId,
+				jobId,
 			},
 		})
 
-		return new Response(newJob.id, { status: 201 })
+		return new Response(newComment.id, { status: 201 })
 	} catch (error) {
 		if (error instanceof z.ZodError) {
 			return new Response(error.message, { status: 422 })
 		}
 
-		return new Response('Could not create job', { status: 500 })
+		return new Response('Could not create comment', { status: 500 })
 	}
 }

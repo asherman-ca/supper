@@ -1,5 +1,4 @@
 import { getAuthSession } from '@/lib/auth'
-import DarkMode from './DarkMode'
 import chefHat from '@/public/chef-hat.png'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -26,7 +25,6 @@ const Nav = async () => {
 			</div>
 			<div className='flex justify-end flex-1 px-2'>
 				<div className='flex items-center gap-4'>
-					{/* <DarkMode /> */}
 					{session ? <Dropdown user={session.user} /> : <Login />}
 				</div>
 			</div>

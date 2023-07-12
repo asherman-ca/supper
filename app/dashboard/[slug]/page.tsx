@@ -1,5 +1,4 @@
 import JobItem from '@/components/dashboard/JobItem'
-import JobTable from '@/components/dashboard/JobTable'
 import TableHeader from '@/components/search/TableHeader'
 import { db } from '@/lib/db'
 import { ExtendedSearch } from '@/types/search'
@@ -21,7 +20,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
 		<div className='flex-[3] flex flex-col py-4'>
 			<TableHeader search={search} />
 			<div className='py-4'>
-				<div className='flex mb-4 px-4 font-medium'>
+				<div className='flex mb-2 px-4 font-medium'>
 					<div className='basis-[20%]'>Company</div>
 					<div className='basis-[20%] text-end'>Role</div>
 					<div className='basis-[20%] text-end'>Location</div>

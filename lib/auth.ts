@@ -5,9 +5,6 @@ import GoogleProvider from 'next-auth/providers/google'
 
 export const authOptions: NextAuthOptions = {
 	adapter: PrismaAdapter(db),
-	pages: {
-		signIn: '/sign-in',
-	},
 	providers: [
 		GoogleProvider({
 			clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -24,10 +21,6 @@ export const authOptions: NextAuthOptions = {
 			}
 
 			return session
-		},
-		redirect() {
-			// redirect to homepage on login
-			return '/dashboard'
 		},
 	},
 }
