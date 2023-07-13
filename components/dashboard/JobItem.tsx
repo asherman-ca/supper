@@ -37,11 +37,13 @@ const JobItem: FC<JobItemProps> = ({
 				href={`/dashboard/${searchId}/${job.id}`}
 				className='flex flex-1 items-center py-2 hover:text-gray-500 dark:hover:text-white cursor-pointer'
 			>
-				<div className='basis-[20%] font-medium'>{job.company}</div>
-				<div className='basis-[20%] text-end'>{job.role}</div>
-				<div className='basis-[20%] text-end'>{job.location}</div>
-				<div className='basis-[20%] text-end'>{statusMap[job.status]}</div>
-				<div className='basis-[20%] text-end'>
+				<div className='basis-[20%] font-medium truncate'>{job.company}</div>
+				<div className='basis-[20%] text-end truncate'>{job.role}</div>
+				<div className='basis-[20%] text-end truncate'>{job.location}</div>
+				<div className='basis-[20%] text-end truncate'>
+					{statusMap[job.status]}
+				</div>
+				<div className='basis-[20%] text-end truncate'>
 					{job.CreatedAt.toDateString()}
 				</div>
 			</Link>
