@@ -1,6 +1,7 @@
 import AppClient from '@/components/application/AppClient'
 import { getAuthSession } from '@/lib/auth'
 import { db } from '@/lib/db'
+import { notFound } from 'next/navigation'
 import { FC } from 'react'
 
 interface pageProps {
@@ -22,7 +23,12 @@ const page: FC<pageProps> = async ({ params }) => {
 			comments: true,
 		},
 	})
-	return <AppClient job={job!} username={session?.user.name!} searchId={slug} />
+
+	if (!job) {
+		return notFound()
+	}
+
+	return <AppClient job={job} username={session?.user.name!} searchId={slug} />
 }
 
 export default page
