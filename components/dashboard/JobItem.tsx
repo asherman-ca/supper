@@ -23,7 +23,7 @@ const JobItem: FC<JobItemProps> = ({
 			layout
 			animate={{ opacity: 1 }}
 			initial={{ opacity: 0 }}
-			className='flex items-center gap-4 border-b border-gray-200'
+			className='flex items-center gap-4 border-b border-gray-200 py-2'
 		>
 			<label className='flex items-center'>
 				<input

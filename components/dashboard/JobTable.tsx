@@ -34,12 +34,13 @@ const JobTable: FC<JobTableProps> = ({
 
 	return (
 		<div className='py-4 px-4'>
-			<div className='flex pb-2 font-medium border-b border-gray-200'>
+			<div className='flex pb-4 font-medium border-b border-gray-200'>
 				<label className='flex items-center mr-4'>
 					<input
 						type='checkbox'
 						className='checkbox'
 						onChange={handleCheckAll}
+						checked={selectedJobs.length > 0}
 					/>
 				</label>
 				<div className='basis-[20%]'>Company</div>

@@ -8,6 +8,7 @@ import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import { set } from 'zod'
+import { on } from 'events'
 
 interface JobClientProps {
 	search: ExtendedSearch
@@ -15,14 +16,16 @@ interface JobClientProps {
 
 const JobClient: FC<JobClientProps> = ({ search }) => {
 	const router = useRouter()
-	const [filter, setFilter] = useState<StatusType>('ACTIVE')
+	const [filter, setFilter] = useState<StatusType | ''>('')
 	const [selectedJobs, setSelectedJobs] = useState<string[]>([])
 
 	const displayJobs = useMemo(() => {
-		return search.jobs?.filter((job) => job.status === filter)
+		if (filter === '') {
+			return search.jobs
+		} else {
+			return search.jobs?.filter((job) => job.status === filter)
+		}
 	}, [filter, search])
-
-	const onStateUpdate = () => {}
 
 	// Delete Logic
 
@@ -42,6 +45,36 @@ const JobClient: FC<JobClientProps> = ({ search }) => {
 
 	const onDelete = () => {
 		deleteJobs(selectedJobs)
+	}
+
+	// State Logic
+
+	const { mutate: updateState, isLoading: stateLoading } = useMutation({
+		mutationFn: async ({
+			ids,
+			state,
+		}: {
+			ids: string[]
+			state: StatusType
+		}) => {
+			const res = await axios.patch(
+				`/api/searches/jobs?ids=${ids.join(',')}&state=${state}`
+			)
+			return res.data
+		},
+		onSuccess: (data) => {
+			setSelectedJobs([])
+			router.refresh()
+		},
+		onError: (err) => {
+			console.log(err)
+		},
+	})
+
+	const onStateUpdate = (state: StatusType) => {
+		const payload = { ids: selectedJobs, state }
+
+		updateState(payload)
 	}
 
 	return (

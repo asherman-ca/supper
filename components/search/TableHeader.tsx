@@ -7,9 +7,9 @@ import { StatusType } from '@prisma/client'
 
 interface TableHeaderProps {
 	search: ExtendedSearch | null
-	setFilter: (value: StatusType) => void
+	setFilter: (value: StatusType | '') => void
 	selectedJobs?: string[]
-	onStateUpdate: (e: any, state: StatusType) => void
+	onStateUpdate: (state: StatusType) => void
 	onDelete: () => void
 	isLoading: boolean
 }
@@ -36,6 +36,9 @@ const TableHeader: FC<TableHeaderProps> = ({
 						className='dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 font-medium'
 					>
 						<li>
+							<a onClick={() => setFilter('')}>All</a>
+						</li>
+						<li>
 							<a onClick={() => setFilter('ACTIVE')}>Active</a>
 						</li>
 						<li>
@@ -58,13 +61,13 @@ const TableHeader: FC<TableHeaderProps> = ({
 								className='dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 font-medium'
 							>
 								<li>
-									<a onClick={() => setFilter('ACTIVE')}>Active</a>
+									<a onClick={() => onStateUpdate('ACTIVE')}>Active</a>
 								</li>
 								<li>
-									<a onClick={() => setFilter('INACTIVE')}>Inactive</a>
+									<a onClick={() => onStateUpdate('INACTIVE')}>Inactive</a>
 								</li>
 								<li>
-									<a onClick={() => setFilter('INTERVIEW')}>Interview</a>
+									<a onClick={() => onStateUpdate('INTERVIEW')}>Interview</a>
 								</li>
 							</ul>
 						</div>
