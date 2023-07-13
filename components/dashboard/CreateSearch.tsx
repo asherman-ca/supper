@@ -60,24 +60,27 @@ const CreateSearch = () => {
 				<PlusCircle className='h-5 w-5' />
 			</div>
 			<dialog id='my_modal_1' className='modal' ref={modalRef}>
-				<form method='dialog' className='modal-box'>
-					<h2 className='text-2xl font-semibold mb-4'>Start New Search</h2>
+				<form method='dialog' className='modal-box p-0'>
+					<h2 className='text-2xl font-semibold my-4 mx-4'>Start New Search</h2>
 					<label>
 						<input
 							{...register('name')}
 							type='text'
 							placeholder='Enter Search Name'
-							className='input input-bordered w-full max-w-xs'
+							className='input input-bordered w-full max-w-xs mx-4'
 						/>
 					</label>
 					{errors.name && (
-						<p className='text-red-400 mt-2'>
+						<p className='text-red-400 mt-2 mx-4'>
 							{errors.name?.message?.replace(/String/gi, 'Name')}
 						</p>
 					)}
-					<div className='flex items-center justify-between'>
-						<div className='modal-action'>
-							<button className='btn' onClick={handleSubmit(onSubmit)}>
+					<div className='flex items-center justify-between p-2 px-4 bg-gray-200/50 mt-4'>
+						<div className='modal-action mt-0'>
+							<button
+								className='btn btn-primary btn-md'
+								onClick={handleSubmit(onSubmit)}
+							>
 								{isLoading && (
 									<span className='loading loading-spinner loading-sm'></span>
 								)}

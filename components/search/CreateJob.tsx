@@ -76,18 +76,18 @@ const CreateJob: FC<CreateJobProps> = ({ searchId }) => {
 				Add Job
 			</button>
 			<dialog id='my_modal_2' className='modal' ref={modalRef}>
-				<form method='dialog' className='modal-box'>
+				<form method='dialog' className='modal-box p-0'>
 					<div className='flex flex-col gap-4'>
-						<h2 className='text-2xl font-semibold'>Add New Job</h2>
+						<h2 className='text-2xl font-semibold mt-4 mx-4'>Add New Job</h2>
 						<label>
 							<input
 								{...register('role')}
 								type='text'
 								placeholder='Enter Job Role'
-								className='input input-bordered w-full max-w-xs'
+								className='input input-bordered w-full max-w-xs mx-4'
 							/>
 							{errors.role && (
-								<p className='text-red-400 mt-2'>
+								<p className='text-red-400 mt-2 mx-4'>
 									{errors.role?.message?.replace(/String/gi, 'Role')}
 								</p>
 							)}
@@ -98,10 +98,10 @@ const CreateJob: FC<CreateJobProps> = ({ searchId }) => {
 								{...register('company')}
 								type='text'
 								placeholder='Enter Company Name'
-								className='input input-bordered w-full max-w-xs'
+								className='input input-bordered w-full max-w-xs mx-4'
 							/>
 							{errors.company && (
-								<p className='text-red-400 mt-2'>
+								<p className='text-red-400 mt-2 mx-4'>
 									{errors.company?.message?.replace(/String/gi, 'Company')}
 								</p>
 							)}
@@ -112,17 +112,20 @@ const CreateJob: FC<CreateJobProps> = ({ searchId }) => {
 								{...register('location')}
 								type='text'
 								placeholder='Enter Location'
-								className='input input-bordered w-full max-w-xs'
+								className='input input-bordered w-full max-w-xs mx-4'
 							/>
 							{errors.location && (
-								<p className='text-red-400 mt-2'>
+								<p className='text-red-400 mt-2 mx-4'>
 									{errors.location?.message?.replace(/String/gi, 'Location')}
 								</p>
 							)}
 						</label>
 
-						<div className='self-start'>
-							<button className='btn' onClick={handleSubmit(onSubmit)}>
+						<div className='flex p-2 px-4 bg-gray-200/50'>
+							<button
+								className='btn btn-primary btn-md'
+								onClick={handleSubmit(onSubmit)}
+							>
 								{isLoading && (
 									<span className='loading loading-spinner loading-sm'></span>
 								)}
