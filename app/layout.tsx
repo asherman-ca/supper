@@ -19,7 +19,7 @@ export default function RootLayout({
 	return (
 		<html lang='en' data-theme='light'>
 			<body
-				className={`${inter.className} min-h-screen flex flex-col`}
+				className={`${inter.className} min-h-screen flex flex-col scrollbar-hide`}
 				suppressHydrationWarning={true}
 			>
 				<Providers>
