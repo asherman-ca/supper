@@ -11,7 +11,7 @@ export default function Home() {
 					className='border border-gray-200'
 				/>
 			</div>
-			<div className='flex flex-col  gap-4 mt-4 bg-white p-8 border-2 border-gray-200 max-w-[50%] rounded-md shadow-md'>
+			<div className='flex flex-col  gap-4 mt-4 bg-white dark:bg-[#1D232A] p-8 border-2 border-gray-200 max-w-[50%] rounded-md shadow-md'>
 				<h1 className='font-bold text-5xl'>Organize your Job Search</h1>
 				<h2 className='font-semibold text-lg'>Optimized CVs with Openai</h2>
 				<p className='font-semibold text-lg'>
@@ -20,24 +20,6 @@ export default function Home() {
 					applications with our streamlined dashboard.
 				</p>
 			</div>
-			{/* <div className='flex justify-between gap-4 max-w-fit'>
-				<div>
-					<h3 className='font-semibold text-xl mb-2'>Dashboard</h3>
-					<Image
-						src={dashboardpreview}
-						alt='dashboard preview'
-						className='border border-gray-200 rounded-md'
-					/>
-				</div>
-				<div>
-					<h3 className='font-semibold text-xl mb-2'>Application Page</h3>
-					<Image
-						src={dashboardpreview}
-						alt='dashboard preview'
-						className='border border-gray-200 rounded-md'
-					/>
-				</div>
-			</div> */}
 		</main>
 	)
 }
