@@ -64,6 +64,7 @@ const JobClient: FC<JobClientProps> = ({ search }) => {
 		},
 		onSuccess: (data) => {
 			setSelectedJobs([])
+			setFilter('')
 			router.refresh()
 		},
 		onError: (err) => {
