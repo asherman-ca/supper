@@ -1,5 +1,3 @@
-import JobTable from '@/components/dashboard/JobTable'
-import TableHeader from '@/components/search/TableHeader'
 import { db } from '@/lib/db'
 import { ExtendedSearch } from '@/types/search'
 import React from 'react'
